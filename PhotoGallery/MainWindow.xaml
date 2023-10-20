@@ -5,27 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhotoGallery"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1024">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-            <TextBox Name="TBXSearch" Width="200" />
-            <Button Name="BTNAdd" Margin="10 0" Padding="20 5" Click="BTNAdd_Click">Add</Button>
-            <Button Name="BTNRemove" Margin="10 0" Padding="20 5" Click="BTNRemove_Click">Remove</Button>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" >
+            <TextBox Name="TBXSearch" Width="200" Margin="10"/>
+            <Button Name="BTNAdd" Margin="10" Padding="20 5" Click="BTNAdd_Click">Add</Button>
+            <Button Name="BTNRemove" Margin="10" Padding="20 5" Click="BTNRemove_Click">Remove</Button>
         </StackPanel>
         <ListBox Name="LSTImageList" ItemsSource="{Binding imagesCollection}"
                  SelectionMode="Multiple"
                  Grid.Row="1" Margin="10">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <Grid Width="320">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="180"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding FilePath}" Stretch="Uniform" />
                         <TextBlock Text="{Binding FilePath}" />
-                    </StackPanel>
+                        <TextBlock Text="{Binding Title}" />
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
         </ListBox>
     </Grid>
 </Window>
