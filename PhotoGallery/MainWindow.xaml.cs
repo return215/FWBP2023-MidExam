@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,13 @@ namespace PhotoGallery
     {
         MainViewModel viewModel = new();
         MainViewModel vmDataContext;
+        ObservableCollection<ImageMetadata> imagesCollection;
         public MainWindow()
         {
             InitializeComponent();
             DataContext = viewModel;
             vmDataContext = (MainViewModel)DataContext;
+            imagesCollection = vmDataContext.imagesCollection;
         }
 
         private void BTNRemove_Click(object sender, RoutedEventArgs e)
@@ -47,7 +50,7 @@ namespace PhotoGallery
                     return;
                 
                 foreach (var image in selectedImages)
-                    vmDataContext.imagesCollection.Remove(image);
+                    imagesCollection.Remove(image);
                 
             }
         }
@@ -67,7 +70,7 @@ namespace PhotoGallery
             {
                 foreach (var f in dialog.FileNames) {
                     ImageMetadata data = new(f);
-                    if (vmDataContext.imagesCollection
+                    if (imagesCollection
                         .Select((i) => i.FilePath)
                         .Contains(f))
                     { 
@@ -78,7 +81,7 @@ namespace PhotoGallery
                             MessageBoxImage.Exclamation
                         );
                     } else  {
-                        vmDataContext.imagesCollection.Add(data);
+                        imagesCollection.Add(data);
                     }
                 }
             }
