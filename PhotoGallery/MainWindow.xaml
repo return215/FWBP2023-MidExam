@@ -13,11 +13,19 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
             <TextBox Name="TBXSearch" Width="200" />
-            <Button Name="BTNAdd" Margin="10 0" Padding="20 5">Add</Button>
-            <Button Name="BTNRemove" Margin="10 0" Padding="20 5">Remove</Button>
+            <Button Name="BTNAdd" Margin="10 0" Padding="20 5" Click="BTNAdd_Click">Add</Button>
+            <Button Name="BTNRemove" Margin="10 0" Padding="20 5" Click="BTNRemove_Click">Remove</Button>
         </StackPanel>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="1" Margin="10">
-            
+        <ListBox Name="LSTImageList" ItemsSource="{Binding imagesCollection}"
+                 SelectionMode="Multiple"
+                 Grid.Row="1" Margin="10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding FilePath}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
 </Window>

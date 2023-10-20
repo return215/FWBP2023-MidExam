@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Microsoft.Win32;
+
 namespace PhotoGallery
 {
     /// <summary>
@@ -20,9 +22,66 @@ namespace PhotoGallery
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel viewModel = new();
+        MainViewModel vmDataContext;
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = viewModel;
+            vmDataContext = (MainViewModel)DataContext;
+        }
+
+        private void BTNRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (LSTImageList.SelectedItems.Count > 0)
+            {
+                List<ImageMetadata> selectedImages = LSTImageList.SelectedItems.Cast<ImageMetadata>().ToList();
+                MessageBoxResult confirmDelete = MessageBox.Show(
+                    $"Delete {selectedImages.Count} images from the list?",
+                    "Confirm Delete",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question
+                );
+
+                if (confirmDelete == MessageBoxResult.No)
+                    return;
+                
+                foreach (var image in selectedImages)
+                    vmDataContext.imagesCollection.Remove(image);
+                
+            }
+        }
+
+        private void BTNAdd_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new()
+            {
+                AddExtension = true,
+                Filter = 
+                    "Image files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.webp;*.tif;*.tiff|" +
+                    "All files|*.*",
+                Multiselect = true
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                foreach (var f in dialog.FileNames) {
+                    ImageMetadata data = new(f);
+                    if (vmDataContext.imagesCollection
+                        .Select((i) => i.FilePath)
+                        .Contains(f))
+                    { 
+                        MessageBox.Show(
+                            $"File already in the list:\n{f}",
+                            "Duplicate files",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Exclamation
+                        );
+                    } else  {
+                        vmDataContext.imagesCollection.Add(data);
+                    }
+                }
+            }
         }
     }
 }
