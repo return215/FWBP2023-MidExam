@@ -23,15 +23,15 @@ namespace PhotoGallery
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainViewModel viewModel = new();
-        MainViewModel vmDataContext;
-        ObservableCollection<ImageMetadata> imagesCollection;
+        readonly MainViewModel viewModel = new();
+        readonly MainViewModel vmDataContext;
+        readonly ObservableCollection<ImageMetadata> imagesCollection;
         public MainWindow()
         {
             InitializeComponent();
             DataContext = viewModel;
             vmDataContext = (MainViewModel)DataContext;
-            imagesCollection = vmDataContext.imagesCollection;
+            imagesCollection = vmDataContext.ImagesCollection;
         }
 
         private void BTNRemove_Click(object sender, RoutedEventArgs e)
@@ -68,10 +68,11 @@ namespace PhotoGallery
 
             if (dialog.ShowDialog() == true)
             {
-                foreach (var f in dialog.FileNames) {
-                    ImageMetadata data = new(f);
+                foreach (var f in dialog.FileNames)
+                {
+                    ImageMetadata data = new(f) { ThumbnailWidth = 320 };
                     if (imagesCollection
-                        .Select((i) => i.FilePath)
+                        .Select((i) => i.FilePath?.AbsolutePath)
                         .Contains(f))
                     { 
                         MessageBox.Show(

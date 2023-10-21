@@ -16,7 +16,7 @@
             <Button Name="BTNAdd" Margin="10" Padding="20 5" Click="BTNAdd_Click">Add</Button>
             <Button Name="BTNRemove" Margin="10" Padding="20 5" Click="BTNRemove_Click">Remove</Button>
         </StackPanel>
-        <ListBox Name="LSTImageList" ItemsSource="{Binding imagesCollection}"
+        <ListBox Name="LSTImageList" ItemsSource="{Binding ImagesCollection}"
                  SelectionMode="Multiple"
                  Grid.Row="1" Margin="10">
             <ListBox.ItemTemplate>
@@ -25,11 +25,12 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="180"/>
                             <RowDefinition/>
-                            <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Image Source="{Binding FilePath}" Stretch="Uniform" />
-                        <TextBlock Text="{Binding FilePath}" />
-                        <TextBlock Text="{Binding Title}" />
+                        <Image Grid.Row="0" Source="{Binding ThumbnailImage}" Stretch="Uniform" />
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Text="{Binding FileName}" />
+                            <TextBlock Text="{Binding Title}" />
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
