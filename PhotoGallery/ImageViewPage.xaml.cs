@@ -21,12 +21,14 @@ namespace PhotoGallery
     public partial class ImageViewPage : Page
     {
         ImageMetadata imageMetadata;
+        
         public ImageViewPage(ImageMetadata imageMetadata)
         {
             InitializeComponent();
             this.imageMetadata = imageMetadata;
             DataContext = this.imageMetadata;
             image.Source = new BitmapImage(this.imageMetadata.FilePath);
+            
         }
 
         private void BTNClose_Click(object sender, RoutedEventArgs e)
@@ -36,7 +38,8 @@ namespace PhotoGallery
 
         private void BTNEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            EditMetadataWindow editMetadataWindow = new(this.imageMetadata);
+            editMetadataWindow.ShowDialog();
         }
     }
 }

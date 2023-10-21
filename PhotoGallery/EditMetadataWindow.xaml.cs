@@ -32,15 +32,13 @@ namespace PhotoGallery
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
-            Close();
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
             data.Title = TxtTitle.Text;
             data.Description = TxtDescription.Text;
-            Close();
+            DialogResult = true;
         }
     }
 }

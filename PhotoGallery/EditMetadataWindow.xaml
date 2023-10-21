@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhotoGallery"
         mc:Ignorable="d"
-        Title="EditMetadataWindow" Height="200" Width="400">
+        Title="EditMetadataWindow" Height="300" Width="500"
+        SizeToContent="Height">
     <Grid
         Margin="10"
         >
