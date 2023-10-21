@@ -18,7 +18,8 @@
         </StackPanel>
         <ListBox Name="LSTImageList" ItemsSource="{Binding ImagesCollection}"
                  SelectionMode="Multiple"
-                 Grid.Row="1" Margin="10">
+                 Grid.Row="1" Margin="10"
+                 MouseDoubleClick="LSTImageList_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="320">

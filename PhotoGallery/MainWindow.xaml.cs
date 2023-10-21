@@ -87,5 +87,14 @@ namespace PhotoGallery
                 }
             }
         }
+
+        private void LSTImageList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var item = ((FrameworkElement)e.OriginalSource).DataContext as ImageMetadata;
+            if (item == null)
+                return;
+
+            MessageBox.Show($"Path: {item.FilePath?.LocalPath}", "Item Double-Clicked");
+        }
     }
 }
