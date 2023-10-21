@@ -14,6 +14,7 @@ namespace PhotoGallery
         public const string COLLECTIONS_FILE = "collections";
         public const string COLLECTIONS_JSON = COLLECTIONS_FILE + ".json";
         public ObservableCollection<ImageMetadata> ImagesCollection { get; set; }
+        public int SelectedImageIndex { get;set; }
             
 
         public MainViewModel()
